@@ -76,12 +76,13 @@ class HandleRequests(BaseHTTPRequestHandler):
         self.end_headers()
 
     def do_GET(self):
+         # Set response code to 'OK'
         self._set_headers(200)
         response = {}  # Default response
 
         # Parse the URL and capture the tuple that is returned
         (resource, id) = self.parse_url(self.path)
-
+        
         if resource == "animals":
             if id is not None:
                 response = f"{get_single_animal(id)}"
@@ -126,32 +127,26 @@ class HandleRequests(BaseHTTPRequestHandler):
         # Parse the URL
         (resource, id) = self.parse_url(self.path)
 
-        # Initialize new animal
-        new_animal = None
-        new_location = None
-        new_employee = None
-        new_customer = None
+        # Initialize new post
+        new_post = None
         # Add a new animal to the list. Don't worry about
         # the orange squiggle, you'll define the create_animal
         # function next.
         if resource == "animals":
-            new_animal = create_animal(post_body)
+            new_post = create_animal(post_body)
 
         elif resource == "locations":
-            new_location = create_location(post_body)
+            new_post = create_location(post_body)
 
         elif resource == "employees":
-            new_employee = create_employee(post_body)
+            new_post = create_employee(post_body)
 
-        if resource == "customers":
-            new_customer = create_customer(post_body)
+        elif resource == "customers":
+            new_post = create_customer(post_body)
 
-        # Encode the new animal and send in response
-        self.wfile.write(f"{new_animal}".encode())
-        self.wfile.write(f"{new_location}".encode())
-        self.wfile.write(f"{new_employee}".encode())
-        self.wfile.write(f"{new_customer}".encode())
-
+        # Encode the new post and send in response
+        self.wfile.write(f"{new_post}".encode())
+        
     def do_DELETE(self):
         # Set a 204 response code
         self._set_headers(204)
