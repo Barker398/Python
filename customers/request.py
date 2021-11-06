@@ -35,7 +35,9 @@ def get_all_customers():
         SELECT
             c.id,
             c.name,
-            c.address
+            c.address,
+            c.email,
+            c.password
         FROM customer c
         """)
 
@@ -52,7 +54,7 @@ def get_all_customers():
             # Note that the database fields are specified in
             # exact order of the parameters defined in the
             # Customer class above.
-            customer = Customer(row['id'], row['name'], row['address'])
+            customer = Customer(row['id'], row['name'], row['address'], row['email'], row['password'])
 
             customers.append(customer.__dict__)
 
