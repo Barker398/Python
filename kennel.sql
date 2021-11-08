@@ -94,3 +94,4 @@ SELECT
 	l.address
 FROM location l  
 WHERE l.id = 1
+
