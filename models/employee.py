@@ -4,5 +4,6 @@ class Employee():
         self.id = id
         self.name = name
         self.location_id = location_id
-
-new_employee = Employee(1, "Chris Barker", 3)
+        self.location = None
+        
+#new_employee = Employee(1, "Chris Barker", 3)
